@@ -10,18 +10,31 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdvisorRouteImport } from './routes/advisor'
 import { Route as FindRouteImport } from './routes/find'
+import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as PreferencesRouteImport } from './routes/preferences'
 import { Route as ReportRouteImport } from './routes/report'
+import { Route as StatusRouteImport } from './routes/status'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdvisorRoute = AdvisorRouteImport.update({
+  id: '/advisor',
+  path: '/advisor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FindRoute = FindRouteImport.update({
   id: '/find',
   path: '/find',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpactRoute = ImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreferencesRoute = PreferencesRouteImport.update({
@@ -34,39 +47,78 @@ const ReportRoute = ReportRouteImport.update({
   path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/advisor': typeof AdvisorRoute
   '/find': typeof FindRoute
+  '/impact': typeof ImpactRoute
   '/preferences': typeof PreferencesRoute
   '/report': typeof ReportRoute
+  '/status': typeof StatusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/advisor': typeof AdvisorRoute
   '/find': typeof FindRoute
+  '/impact': typeof ImpactRoute
   '/preferences': typeof PreferencesRoute
   '/report': typeof ReportRoute
+  '/status': typeof StatusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/advisor': typeof AdvisorRoute
   '/find': typeof FindRoute
+  '/impact': typeof ImpactRoute
   '/preferences': typeof PreferencesRoute
   '/report': typeof ReportRoute
+  '/status': typeof StatusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/find' | '/preferences' | '/report'
+  fullPaths:
+    | '/'
+    | '/advisor'
+    | '/find'
+    | '/impact'
+    | '/preferences'
+    | '/report'
+    | '/status'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/find' | '/preferences' | '/report'
-  id: '__root__' | '/' | '/find' | '/preferences' | '/report'
+  to:
+    | '/'
+    | '/advisor'
+    | '/find'
+    | '/impact'
+    | '/preferences'
+    | '/report'
+    | '/status'
+  id:
+    | '__root__'
+    | '/'
+    | '/advisor'
+    | '/find'
+    | '/impact'
+    | '/preferences'
+    | '/report'
+    | '/status'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdvisorRoute: typeof AdvisorRoute
   FindRoute: typeof FindRoute
+  ImpactRoute: typeof ImpactRoute
   PreferencesRoute: typeof PreferencesRoute
   ReportRoute: typeof ReportRoute
+  StatusRoute: typeof StatusRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -78,11 +130,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/advisor': {
+      id: '/advisor'
+      path: '/advisor'
+      fullPath: '/advisor'
+      preLoaderRoute: typeof AdvisorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/find': {
       id: '/find'
       path: '/find'
       fullPath: '/find'
       preLoaderRoute: typeof FindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impact': {
+      id: '/impact'
+      path: '/impact'
+      fullPath: '/impact'
+      preLoaderRoute: typeof ImpactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/preferences': {
@@ -99,14 +165,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdvisorRoute: AdvisorRoute,
   FindRoute: FindRoute,
+  ImpactRoute: ImpactRoute,
   PreferencesRoute: PreferencesRoute,
   ReportRoute: ReportRoute,
+  StatusRoute: StatusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
